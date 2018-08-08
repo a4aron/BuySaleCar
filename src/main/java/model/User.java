@@ -27,6 +27,9 @@ public class User {
         this.userName = userName;
         this.password = password;
     }
+    public User() {
+
+    }
 
     public int getId() {
         return id;

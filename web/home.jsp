@@ -110,6 +110,7 @@
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             Search
                         </button>
+                        <button id="btnUndo" type="button" class="btn btn-default">Undo</button>
                     </form>
                 </div>
             </div>

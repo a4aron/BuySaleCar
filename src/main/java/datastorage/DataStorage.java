@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.*;
+import Command.*;
 
 public enum DataStorage {
 
@@ -22,7 +23,7 @@ public enum DataStorage {
             "Chevrolet","Lexus","Other"};
     public String[] carShapes = {"Sedan","SUV","Van","Hatchback","Truck","Crossover","Coupe","Convertible"};
     public Map<String, String>  cookieMap = new HashMap<>();
-
+    public Command command = new BackupCommand();
     public void loadDefaultData(){
 
         User u1 = new ConcreteUserBuilder("arun","magar").MiddleName("Thapa").Email("arun.magar@gmail.com").PhoneNumber("123456789").
@@ -65,6 +66,7 @@ public enum DataStorage {
         if (getCarByLicense(car.getLicense()) != null){
             throw new CarAlreadyExistsException("Car already exists");
         }
+        command.backup(getAllCars());
         cars.add(car);
         return car;
     }
@@ -134,6 +136,10 @@ public enum DataStorage {
             }
         }
         return null;
+    }
+
+    public void RestoreCars() {
+        this.cars = reverseList(command.restore().getCars());
     }
 
 }

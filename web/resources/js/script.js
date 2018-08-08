@@ -138,6 +138,11 @@
             fetchAllCars();
             return false;
         });
+        $("#btnUndo").click(function () {
+            $.get('restore');
+            fetchAllCars();
+            return false;
+        });
         
         //region add car
         $("#btnAddCar").click(function (e) {

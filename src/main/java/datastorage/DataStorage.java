@@ -1,5 +1,7 @@
 package datastorage;
 
+import Builder.ConcreteUserBuilder;
+import Builder.UserBuilder;
 import exceptions.CarAlreadyExistsException;
 import exceptions.UserAlreadyExistsException;
 import model.Car;
@@ -22,13 +24,13 @@ public enum DataStorage {
     public Map<String, String>  cookieMap = new HashMap<>();
 
     public void loadDefaultData(){
-        User u1 = new User(1,"silas", "kaggwa", "silakag@gmail.com",
-                "034234234","1000N St. Maharishi", "silas","12345");
-        User u2 = new User(2,"bishwa", "bishwa", "bishwa@gmail.com",
-                "76463437747","1000N St. Goldfich", "bishwa","12345");
-        User u3 = new User(3,"kiran", "kiran", "kiran@gmail.com",
-                "455345345535","1000N St. Mum", "kiran","12345");
 
+        User u1 = new ConcreteUserBuilder("arun","magar").MiddleName("Thapa").Email("arun.magar@gmail.com").PhoneNumber("123456789").
+                Address("1000N St. Maharishi").UserName("arun").Password("12345").build();
+        User u2 = new ConcreteUserBuilder("bishwa","khatri").Email("bishwa.khatri@gmail.com").PhoneNumber("123456789").
+                Address("1000N St. Maharishi").UserName("bishwa").Password("12345").build();
+        User u3 = new ConcreteUserBuilder("Zhuang","niu").Email("zhuang@gmail.com").PhoneNumber("123456789").
+                Address("1000N St. Maharishi").UserName("zhuang").Password("12345").build();
         users.add(u1);
         users.add(u2);
         users.add(u3);

@@ -1,5 +1,7 @@
 package controllers;
 
+import Builder.ConcreteUserBuilder;
+import Builder.UserBuilder;
 import datastorage.DataStorage;
 import exceptions.UserAlreadyExistsException;
 import model.User;
@@ -34,7 +36,9 @@ public class RegisterServlet extends HomeServlet {
         if(!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !phonenumber.isEmpty() && !address.isEmpty()
                 && !user.isEmpty() && !password.isEmpty()){
 
-            User newUser = new User(id,firstname,lastname,email,phonenumber,address,user,password);
+            //builder pattern
+            User newUser = new ConcreteUserBuilder(firstname, lastname).Email(email).PhoneNumber(phonenumber).Address(address).
+                    UserName(user).Password(password).build();
 
 
             try {

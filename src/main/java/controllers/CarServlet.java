@@ -8,6 +8,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import services.CarService;
+import services.CarServiceProxy;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -127,8 +128,8 @@ public class CarServlet extends HttpServlet {
 
                     // System.out.println(map);
                     User user = DataStorage.INSTANCE.getUserByUsername(req.getSession().getAttribute("userName").toString());
-                    Car newCar =   CarService.INSTANCE.createCar(map,user);
-
+//                    Car newCar =   CarService.INSTANCE.createCar(map,user);
+                    Car newCar = new CarServiceProxy(req).createCar(map,user);
 
                     resp.setContentType("application/json");
                     resp.setCharacterEncoding("UTF-8");

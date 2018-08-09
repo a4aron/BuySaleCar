@@ -4,6 +4,7 @@ import Builder.ConcreteUserBuilder;
 import Builder.UserBuilder;
 import exceptions.CarAlreadyExistsException;
 import exceptions.UserAlreadyExistsException;
+import genericmodel.Rent;
 import model.Car;
 import model.User;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public enum DataStorage {
 
     private List<Car> cars = new ArrayList<>();
     private List<User> users = new ArrayList<>();
+    private List<Rent> rents = new ArrayList<>();
     public String[] carBrands = {"Mercedes","BMW","Toyota","Audi","Tesla","Ford","Cadillac","Mazda","Buick",
             "Chevrolet","Lexus","Other"};
     public String[] carShapes = {"Sedan","SUV","Van","Hatchback","Truck","Crossover","Coupe","Convertible"};
@@ -39,25 +41,27 @@ public enum DataStorage {
 
 
         cars.add(new Car(1, "GNG 123","2000", carBrands[0], 7400, "red","Sedan", false,
-                new Date(), 0, "resources/images/benz.jpg", u1));
+                new Date(), 0, "resources/images/benz.jpg", u1,false));
         cars.add(new Car(2, "GYT 543","2000", carBrands[1], 23000, "red","SUV", false,
-                new Date(), 0, "resources/images/bmw1.jpg", u1));
+                new Date(), 0, "resources/images/bmw1.jpg", u1,false));
         cars.add(new Car(3, "GNG 654","2000", carBrands[2], 6700, "red","Van", false,
-                new Date(), 0, "resources/images/rav4.jpg",u2));
+                new Date(), 0, "resources/images/rav4.jpg",u2,false));
         cars.add(new Car(4, "PYT 123","2000", carBrands[3], 19000, "red","Hatchback", false,
-                new Date(), 0, "resources/images/audi.jpg",u2));
+                new Date(), 0, "resources/images/audi.jpg",u2,false));
         cars.add(new Car(5,"MGT 123","2000", carBrands[4], 43000, "red","Crossover", false,
-                new Date(), 0, "resources/images/van.jpg",u3));
+                new Date(), 0, "resources/images/van.jpg",u3,false));
         cars.add(new Car(6, "CFT 123","2000", carBrands[5], 5900, "red","Coupe", false,
-                new Date(), 0, "resources/images/mazda1.jpg",u3));
+                new Date(), 0, "resources/images/mazda1.jpg",u3,false));
         cars.add(new Car(7, "TGD 123","2000", carBrands[2], 29900, "red","Crossover", false,
-                new Date(), 0, "resources/images/pickup1.jpg",u3));
+                new Date(), 0, "resources/images/pickup1.jpg",u3,false));
         cars.add(new Car(8, "RHI 123","2000", carBrands[1], 20000, "red","Convertible", false,
-                new Date(), 0, "resources/images/benzA.jpg",u1));
+                new Date(), 0, "resources/images/benzA.jpg",u1,false));
         cars.add(new Car(9, "BPT 123","2000", carBrands[6], 52000, "red","Truck", false,
-                new Date(), 0, "resources/images/bmw2.jpg",u2));
+                new Date(), 0, "resources/images/bmw2.jpg",u2,false));
         cars.add(new Car(10, "JVT 123","2000", carBrands[7], 25000, "red","Sedan", false,
-                new Date(), 0, "resources/images/pickup2.jpg",u2));
+                new Date(), 0, "resources/images/pickup2.jpg",u2,false));
+
+        rents.add(new Rent(1,cars.get(0),new Date(2017,12,25),new Date(2017,12,1),1245));
 
         System.out.println("=======>>>>data loaded");
     }
@@ -140,6 +144,28 @@ public enum DataStorage {
 
     public void RestoreCars() {
         this.cars = reverseList(command.restore().getCars());
+    }
+
+    public Rent addRent(Rent rent) {
+        rents.add(rent);
+        return rent;
+    }
+
+    public Rent getRent(int id) {
+        for (Rent rent : rents){
+            if (rent.getID() == id){
+                return rent;
+            }
+        }
+        return null;
+    }
+
+    public void setCarRentFlag(int prodID){
+        for (Car car : cars){
+            if (car.getId() == prodID){
+                car.setRented(true);
+            }
+        }
     }
 
 }

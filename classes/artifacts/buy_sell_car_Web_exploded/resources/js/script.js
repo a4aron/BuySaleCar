@@ -4,7 +4,8 @@
     let carsDisplayed = [];
 
     $(function () {
-
+        $( "#datepickerStartDate" ).datepicker();
+        $( "#datepickerEndDate" ).datepicker();
         $(document).ajaxStart(function() {
             $("#top-loader").show();
         });
@@ -138,7 +139,44 @@
             fetchAllCars();
             return false;
         });
-        
+        $("#btnUndo").click(function () {
+            $.get('restore');
+            fetchAllCars();
+            return false;
+        });
+        $("#btnRent").click(function(){
+            let startDate =$("#datepickerStartDate").val();
+            let endDate = $("#datepickerEndDate").val();
+            let productID = $(this).attr("product-id");
+            debugger;
+            if(typeof  startDate != "undefined" && startDate.length>0 && typeof endDate != "undefined" &&
+                endDate.length >0 && typeof  productID != "undefined"&& productID.length >0) {
+                $.ajax({
+                    method: 'POST',
+                    url: 'rent',
+                    data: {
+                        "id": productID,
+                        "startDate": startDate,
+                        "endDate": endDate
+                    },
+                    success: function (response) {
+                        debugger;
+                        if(response == "true") {
+                            alert("Rent process success")
+                            fetchAllCars();
+                        }
+                        else {
+                            alert("Rent process Uncess. Please try again later")
+                        }
+
+                    },
+                    error: function (error) {
+                        alert("Rent process Uncess. Please try again later")
+                    }
+                });
+            }
+
+        });
         //region add car
         $("#btnAddCar").click(function (e) {
             if(validateAddCarModal()){
@@ -230,7 +268,7 @@
                     $(".log-in").removeClass("none");
                     $("#AddCar").addClass("none");
                     $(".log-out").addClass("none");
-                    $
+                    $("#rent-wrapper").addClass("none");
                 },
                 error: function (error) {
                 }
@@ -249,6 +287,7 @@
         $('#ownerEmail').text(car.owner.email);
         $('#ownerPhone').text(car.owner.phoneNumber);
         $('#ownerAddress').text(car.owner.address);
+        $("#btnRent").attr("product-id",car.id)
     }
 
     function displayCarInfoModal(){
@@ -349,6 +388,7 @@
         else
         {
             $("#loginName").html(`<a>Hello ${response}</a>`);
+            $("#rent-wrapper").removeClass("none");
             $(".log-in").addClass("none");
             $("#AddCar").removeClass("none");
             $(".log-out").removeClass("none");

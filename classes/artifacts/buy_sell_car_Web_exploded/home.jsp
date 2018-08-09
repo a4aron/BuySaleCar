@@ -22,7 +22,9 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-
+    <!--jquery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- custom js and css -->
     <link rel="stylesheet" href="resources/css/style.css">
@@ -110,6 +112,7 @@
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             Search
                         </button>
+                        <button id="btnUndo" type="button" class="btn btn-default">Undo</button>
                     </form>
                 </div>
             </div>
@@ -324,6 +327,11 @@
                                         <div class="row">
                                             <span class="glyphicon glyphicon-map-marker color-green" aria-hidden="true"></span>
                                             <span id="ownerAddress">Loading...</span>
+                                        </div>
+                                        <div class="row <%=request.getSession().getAttribute("userName") == null?"none":"" %>" id="rent-wrapper">
+                                            <p>Date: <input type="text" id="datepickerStartDate"> TO
+                                            <input type="text" id="datepickerEndDate">
+                                                <button type="button" class="btn btn-primary btn-lg" id="btnRent">Rent</button>
                                         </div>
                                     </div>
                                 </div>

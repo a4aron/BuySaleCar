@@ -20,6 +20,7 @@ public enum CarService {
         return DataStorage.INSTANCE.getAllCars().stream()
                 .filter(c -> c.getPrice() >= minPrice)
                 .filter(c -> c.getPrice() <= maxPrice)
+                .filter(c -> !c.isRented())
                 .filter(c -> Arrays.asList(brands).contains(c.getBrand()))
                 .filter(c -> Arrays.asList(shapes).contains(c.getShape()))
                 .collect(Collectors.toList());
@@ -41,7 +42,7 @@ public enum CarService {
         String image = carDict.get("image");
         String shape = carDict.get("shape");
 
-        Car car = new Car((int)(Math.random() * (1000-10)) + 10, number,model,brand,price,color,shape,isSold,startDate,discount,image,user);
+        Car car = new Car((int)(Math.random() * (1000-10)) + 10, number,model,brand,price,color,shape,isSold,startDate,discount,image,user,false);
         DataStorage.INSTANCE.addCar(car);
         return car;
     }

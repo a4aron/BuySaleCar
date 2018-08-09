@@ -37,7 +37,7 @@ public abstract class UserBuilder {
     public abstract UserBuilder CardExpiryDate(String cardExpiryDate);
     public abstract UserBuilder CardSecurityCode(String cardSecurityNumber);
     public abstract UserBuilder Cars(List<Car> cars);
-    
+
     public abstract User build();
 
 }

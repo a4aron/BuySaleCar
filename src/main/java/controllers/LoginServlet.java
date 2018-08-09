@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
                 if (optUser != null) {
                     HttpSession sess = req.getSession();
                     sess.setAttribute("userName", username);
+                    sess.setAttribute("uid", DataStorage.INSTANCE.getUserByUsername(username).getId());
 
                     String rememberMe = req.getParameter("rememberMe");
                     if(rememberMe != null && rememberMe != "" && rememberMe.equals("true")){

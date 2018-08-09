@@ -1,41 +1,37 @@
-package controllers;
-
+package CoR;
 import Builder.ConcreteUserBuilder;
-import Builder.UserBuilder;
-import CoR.Chain;
-import CoR.EmailValidator;
-import CoR.NotEmptyFilter;
 import datastorage.DataStorage;
 import exceptions.UserAlreadyExistsException;
 import exceptions.UserInputValidationException;
 import model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+public class EmailValidator implements Chain{
+    private Chain nextChain;
 
-@WebServlet("/register")
-public class RegisterServlet extends HomeServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //
+    public boolean isValid(String emailStr)
+    {
+        Matcher matcher = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE).matcher(emailStr);
+        if(matcher.find()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Chain nonEmptyFilter = new NotEmptyFilter();
-        Chain emailValidator = new EmailValidator();
-        nonEmptyFilter.setNextChain(emailValidator);
+    public void setNextChain(Chain nextChain) {
+        this.nextChain = nextChain;
+    }
 
-        try {
-            nonEmptyFilter.validate(req,resp);
-        } catch (UserInputValidationException e) {
-            resp.getWriter().print("false");
-        }
-/*
+    @Override
+    public void validate(HttpServletRequest req, HttpServletResponse resp) throws IOException, UserInputValidationException {
         PrintWriter out = resp.getWriter();
         int id = Integer.parseInt(req.getParameter("id"));
         String firstname = req.getParameter("firstName");
@@ -45,15 +41,10 @@ public class RegisterServlet extends HomeServlet {
         String address = req.getParameter("address");
         String user = req.getParameter("usr");
         String password = req.getParameter("pswd");
-
-
-        if(!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !phonenumber.isEmpty() && !address.isEmpty()
-                && !user.isEmpty() && !password.isEmpty()){
-
+        if(isValid(email)){
             //builder pattern
             User newUser = new ConcreteUserBuilder(firstname, lastname).Email(email).PhoneNumber(phonenumber).Address(address).
                     UserName(user).Password(password).build();
-
 
             try {
                 DataStorage.INSTANCE.addUser(newUser);
@@ -62,17 +53,7 @@ public class RegisterServlet extends HomeServlet {
                 e.printStackTrace();
                 out.print("false");
             }
-
         }
-        else {
-           // req.setAttribute("msg","Account not created. Field missing.");
-            //out.print("failed");
-            out.print("false");
-          //  req.getRequestDispatcher("home.jsp").forward(req,resp);
-
-        }
-*/
-
-
+        else throw new UserInputValidationException("Invalid email");
     }
 }

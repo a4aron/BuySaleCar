@@ -45,5 +45,13 @@ public abstract class Product {
         this.id = id;
     }
 
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", price=" + price +
+                ", name='" + name + '\'' +
+                ", isRented=" + isRented +
+                '}';
+    }
 }

@@ -137,7 +137,7 @@ public class User implements Observer {
 
     @Override
     public void update(Product product) {
-        System.out.println("Observer: "+this.userName+" product "+product.getName());
+        System.out.println("Observer: "+this.toString()+" product "+product.toString());
     }
 
     @Override
@@ -146,4 +146,16 @@ public class User implements Observer {
         return this.getUserName().equals(u.getUserName());
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }

@@ -145,5 +145,5 @@ public class User implements Observer {
        User u = (User)obj;
         return this.getUserName().equals(u.getUserName());
     }
-    
+
 }

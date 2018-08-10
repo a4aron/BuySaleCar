@@ -62,6 +62,10 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
+        <div class="suscribtion-wrapper" style="position: fixed; right: 0;bottom: 0;">
+            <button type="button" class="btn btn-warning" id="btnSuscribe">Suscribe</button>
+            <button type="button" class="btn btn-warning" id="btnUnSuscribe">Unsuscribe</button>
+        </div>
         <div id="content-wrapper">
             <div id="aside">
                 <div class="filter">

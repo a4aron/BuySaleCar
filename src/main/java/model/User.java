@@ -1,10 +1,12 @@
 package model;
 
 import Builder.UserBuilder;
+import Observer.Observer;
+import genericmodel.Product;
 
 import java.util.List;
 
-public class User {
+public class User implements Observer {
     private int id;
     private String firstname;
     private String lastName;
@@ -132,4 +134,16 @@ public class User {
         return cardSecurityNumber;
     }
 
+
+    @Override
+    public void update(Product product) {
+        System.out.println("Observer: "+this.userName+" product "+product.getName());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+       User u = (User)obj;
+        return this.getUserName().equals(u.getUserName());
+    }
+    
 }

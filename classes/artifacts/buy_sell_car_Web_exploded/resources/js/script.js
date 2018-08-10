@@ -107,13 +107,13 @@
                 method: 'POST',
                 url: 'login',
                 data: {
-                   "userName": uName,
+                    "userName": uName,
                     "passWord":pwd,
                     "rememberMe": $("#rememberMe").prop("checked"),
                 },
                 success: function (response) {
 
-                   performLoginSuccess(response);
+                    performLoginSuccess(response);
                 },
                 error: function (error) {
                     alert("invalid login credentials");
@@ -177,6 +177,58 @@
             }
 
         });
+        $("#btnSuscribe").click(function(){
+            debugger;
+
+                $.ajax({
+                    method: 'POST',
+                    url: 'suscribe',
+                    data: {
+                        "type": "suscribe"
+                    },
+                    success: function (response) {
+                        debugger;
+                        if(response == "true") {
+                            alert("Suscription success")
+                            fetchAllCars();
+                        }
+                        else {
+                            alert("Suscription failed")
+                        }
+
+                    },
+                    error: function (error) {
+                        alert("Suscription failed")
+                    }
+                });
+
+        });
+        $("#btnUnSuscribe").click(function(){
+            debugger;
+
+            $.ajax({
+                method: 'POST',
+                url: 'suscribe',
+                data: {
+                    "type": "unsuscribe"
+                },
+                success: function (response) {
+                    debugger;
+                    if(response == "true") {
+                        alert("Suscription success")
+                        fetchAllCars();
+                    }
+                    else {
+                        alert("Suscription failed")
+                    }
+
+                },
+                error: function (error) {
+                    alert("Suscription failed")
+                }
+            });
+
+        });
         //region add car
         $("#btnAddCar").click(function (e) {
             if(validateAddCarModal()){
@@ -227,7 +279,7 @@
 
                     },
                     error: function (error) {
-                       alert("problem in adding car");
+                        alert("problem in adding car");
                     }
                 });
             }
@@ -320,7 +372,7 @@
             success: function (response) {
                 let carsHtml = '';
                 for(let car of response){
-                    carsHtml += generateCarHtml(car); 
+                    carsHtml += generateCarHtml(car);
                 }
                 $('#content').empty();
                 setTimeout(()=>$('#content').append(carsHtml), 0);

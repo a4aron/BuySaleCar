@@ -2,6 +2,8 @@ package controllers;
 
 import com.google.gson.Gson;
 import datastorage.DataStorage;
+import genericmodel.Product;
+import Observer.ProductData;
 import model.Car;
 import model.User;
 import org.apache.commons.fileupload.FileItem;
@@ -129,6 +131,9 @@ public class CarServlet extends HttpServlet {
                     User user = DataStorage.INSTANCE.getUserByUsername(req.getSession().getAttribute("userName").toString());
                     Car newCar =   CarService.INSTANCE.createCar(map,user);
 
+                    //observer
+                    ProductData.INSTANCE.setProduct(newCar);
+                  //  ProductData
 
                     resp.setContentType("application/json");
                     resp.setCharacterEncoding("UTF-8");

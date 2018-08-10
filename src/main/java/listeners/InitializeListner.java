@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebListener;
 public class InitializeListner implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        System.out.println(">>>> loading default data");
+     //   System.out.println(">>>> loading default data");
         DataStorage.INSTANCE.loadDefaultData();
         servletContextEvent.getServletContext().setAttribute("carShapes", DataStorage.INSTANCE.carShapes);
         servletContextEvent.getServletContext().setAttribute("carBrands", DataStorage.INSTANCE.carBrands);

@@ -63,7 +63,7 @@ public enum DataStorage {
 
         rents.add(new Rent(1,cars.get(0),new Date(2017,12,25),new Date(2017,12,1),1245));
 
-        System.out.println("=======>>>>data loaded");
+       // System.out.println("=======>>>>data loaded");
     }
 
     public Car addCar(Car car) throws CarAlreadyExistsException {
@@ -115,7 +115,7 @@ public enum DataStorage {
 
     public User getUserByUsername(String username){
         for (User user : users){
-            System.out.println(user.getUserName());
+           // System.out.println(user.getUserName());
             if (user.getUserName().equals(username)){
                 return user;
             }

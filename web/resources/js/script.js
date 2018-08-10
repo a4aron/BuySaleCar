@@ -215,16 +215,16 @@
                 success: function (response) {
                     debugger;
                     if(response == "true") {
-                        alert("Suscription success")
+                        alert("UnSuscription success")
                         fetchAllCars();
                     }
                     else {
-                        alert("Suscription failed")
+                        alert("UnSuscription failed")
                     }
 
                 },
                 error: function (error) {
-                    alert("Suscription failed")
+                    alert("UnSuscription failed")
                 }
             });
 
@@ -321,6 +321,7 @@
                     $("#AddCar").addClass("none");
                     $(".log-out").addClass("none");
                     $("#rent-wrapper").addClass("none");
+                    $(".suscribtion-wrapper").addClass("none");
                 },
                 error: function (error) {
                 }
@@ -446,6 +447,7 @@
             $(".log-out").removeClass("none");
             $("#formlogin").find(":input").val("");
             $("#loginUser").modal('hide')
+            $(".suscribtion-wrapper").removeClass("none");
         }
 
     }

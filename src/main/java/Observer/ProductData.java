@@ -31,7 +31,6 @@ public enum ProductData implements ProductSubject {
         for (User user: observers
              ) {
                 user.update(this.product);
-                System.out.println("Observer: "+user.getUserName() +" product: "+ this.product.getName());
         }
     }
 }
